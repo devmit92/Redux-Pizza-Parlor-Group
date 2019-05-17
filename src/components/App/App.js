@@ -4,6 +4,9 @@ import './App.css';
 import { connect } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
+import { getOriginalPizzaList } from '../../modules/services/pizza.service';
+
 
 
 class App extends Component {
@@ -16,26 +19,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getOriginalPizzaList();
+    this.dispatchPizzaToRedux();
   }
 
-  getOriginalPizzaList() {
-    axios.get('/api/pizza')
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          pizzaArray: res.data
-        });
-        console.log(this.state)
+  
+  dispatchPizzaToRedux = () => {
+    getOriginalPizzaList().then((response) => {
+      console.log(response)
+      this.props.dispatch({
+        type: 'ADD_PIZZA_TO_REDUX',
+        payload: response.data,
       })
-      .catch((err) => {
-        console.log(err);
-      })
+    })
   }
 
 
   render() {
-    const pizzaHTML = this.state.pizzaArray.map((pizza, index) => {
+    const pizzaHTML = this.props.reduxState.pizzaReducer.map((pizza, index) => {
       return (
         <div key={index}>
           <img src={pizza.image_path} alt={pizza.description}/>
@@ -59,4 +59,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapReduxStateToProps)(App);

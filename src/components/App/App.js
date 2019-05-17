@@ -34,10 +34,15 @@ class App extends Component {
   }
 
   addPizzaToOrder = (event) => {
-    addPizzaToOrderTable().then((response) => {
-      console.log(response)
+   event.preventDefault();
+   this.props.dispatch({
+     type: 'PIZZA_DISPATCH',
+     payload: this.state.pizzaArray
     })
-  }
+   }
+
+
+
 
 
   render() {
@@ -48,7 +53,7 @@ class App extends Component {
           <p>{pizza.name}</p>
           <p>{pizza.description}</p>
           <p>{pizza.price}</p>
-          <button onClick={this.addPizzaToOrder}>Add</button>
+          <button data-id={index} onClick={this.addPizzaToOrder}>Add</button>
           <button>Remove</button>
         </div>
       )

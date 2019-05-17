@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
-import { getOriginalPizzaList } from '../../modules/services/pizza.service';
+import { getOriginalPizzaList, addPizzaToOrderTable } from '../../modules/services/pizza.service';
 
 
 
@@ -33,6 +33,12 @@ class App extends Component {
     })
   }
 
+  addPizzaToOrder = (event) => {
+    addPizzaToOrderTable().then((response) => {
+      console.log(response)
+    })
+  }
+
 
   render() {
     const pizzaHTML = this.props.reduxState.pizzaReducer.map((pizza, index) => {
@@ -42,6 +48,8 @@ class App extends Component {
           <p>{pizza.name}</p>
           <p>{pizza.description}</p>
           <p>{pizza.price}</p>
+          <button onClick={this.addPizzaToOrder}>Add</button>
+          <button>Remove</button>
         </div>
       )
     })

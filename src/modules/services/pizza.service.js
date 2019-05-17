@@ -7,6 +7,11 @@ const getOriginalPizzaList = () => {
         })
     }
 
+const addPizzaToOrderTable = (pizzaObject) => {
+    return axios.post('/api/order', pizzaObject);
+}
+
 export {
+    addPizzaToOrderTable,
     getOriginalPizzaList,
 }

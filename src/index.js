@@ -6,25 +6,17 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 
-const pizzaReducer = (state = [], action) => {
+const pizzaReducer = (state =[], action) => {
     if (action.type === 'ADD_PIZZA_TO_REDUX') {
-        return action.payload;
-    } 
-    return state;
-
-}
-
-const pizzaAddedReducer = (state = [], action) => {
-    if (action.type === 'PIZZA_DISPATCH') {
-        return [...state, action.payload.pizzaArray];
+        return action.payload
     }
     return state;
+
 }
 
 const storeInstance = createStore(
     combineReducers({
         pizzaReducer,
-        pizzaAddedReducer
     }),
     applyMiddleware(logger),
  );

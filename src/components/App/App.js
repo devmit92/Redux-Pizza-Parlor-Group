@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './App.css';
 import { connect } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
 import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
-import { getOriginalPizzaList, addPizzaToOrderTable } from '../../modules/services/pizza.service';
+import { getOriginalPizzaList, addPizzaToOrderTable, deletePizzaOrder } from '../../modules/services/pizza.service';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import PizzaList from '../PizzaList/pizzalist';
 
 
 
@@ -33,32 +32,22 @@ class App extends Component {
     })
   }
 
-  addPizzaToOrder = (event) => {
-   event.preventDefault();
-   this.props.dispatch({
-     type: 'PIZZA_DISPATCH',
-     payload: this.state.pizzaArray
+  
+deletePizzaFromCart = (event) => {
+  deletePizzaOrder().then((response) => {
+    console.log(response)
+    this.props.dispatch({
+      type: 'DELETE_ORDER',
+      payload: event.target.dataset.id,
     })
-   }
-
-
+  })
+}
 
 
 
   render() {
-    const pizzaHTML = this.props.reduxState.pizzaReducer.map((pizza, index) => {
-      return (
-        <div key={index}>
-          <img src={pizza.image_path} alt={pizza.description}/>
-          <p>{pizza.name}</p>
-          <p>{pizza.description}</p>
-          <p>{pizza.price}</p>
-          <button data-id={index} onClick={this.addPizzaToOrder}>Add</button>
-          <button>Remove</button>
-        </div>
-      )
-    })
     return (
+      <Router>
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Prime Pizza</h1>
@@ -66,9 +55,10 @@ class App extends Component {
         <br/>
         <img src="images/pizza_photo.png"/>
         <p>Pizza is great.</p>
-        {pizzaHTML}
+        <Route exact path="/" component={PizzaList} />
       </div>
-    );
+      </Router>
+    )
   }
 }
 

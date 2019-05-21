@@ -21,8 +21,19 @@ const pizzaAddedReducer = (state = [], action) => {
     return state;
 }
 
+const removePizzaReducer = (state = [], action) => {
+    if (action.type === 'DELETE_ORDER') {
+        const newState = state.filter((element, index) => {
+            return index !== parseInt(action.payload);
+        });
+        return newState;
+    }
+    return state;
+}
+
 const storeInstance = createStore(
     combineReducers({
+        removePizzaReducer,
         pizzaReducer,
         pizzaAddedReducer
     }),

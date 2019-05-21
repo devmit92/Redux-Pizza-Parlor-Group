@@ -40,8 +40,6 @@ class App extends Component {
 
 
 
-
-
   render() {
     const pizzaHTML = this.props.reduxState.pizzaReducer.map((pizza, index) => {
       return (

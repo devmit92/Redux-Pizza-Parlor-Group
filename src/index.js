@@ -21,10 +21,18 @@ const pizzaAddedReducer = (state = [], action) => {
     return state;
 }
 
+const pizzaCheckoutReducer = (state = [], action) => {
+    if (action.type === 'CHECKOUT') {
+        return [...state.action.payload];
+    }else if (action.type === 'CLEARCHECKOUT'){
+        return [];
+    };
+
 const storeInstance = createStore(
     combineReducers({
         pizzaReducer,
-        pizzaAddedReducer
+        pizzaAddedReducer,
+        pizzaCheckoutReducer
     }),
     applyMiddleware(logger),
  );

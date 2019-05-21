@@ -7,11 +7,12 @@ import { addPizzaToOrderTable } from '../../modules/services/pizza.service';
 
 class CheckoutPage extends Component {
     handleCheckout = (event) => {
-        addPizzaToOrderTable(this.reduxState.pizzaAddedReducer)
-        this.props.dispatch({
-            type: 'CLEARCHECKOUT'
-        })
-    }
+        addPizzaToOrderTable(this.reduxState.pizzaAddedReducer).then((response) => {
+         this.props.dispatch({
+            type: 'CLEARCHECKOUT'    
+         });
+        });
+    };
 
     render() {
         return (

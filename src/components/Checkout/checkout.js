@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
-import { logger } from 'redux-logger';
-import Axios from 'axios';
 import { addPizzaToOrderTable } from '../../modules/services/pizza.service';
 
 

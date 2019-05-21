@@ -2,26 +2,19 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
-import { getOriginalPizzaList, addPizzaToOrderTable, deletePizzaOrder } from '../../modules/services/pizza.service';
+import { getOriginalPizzaList } from '../../modules/services/pizza.service';
 import { HashRouter as Router, Route } from 'react-router-dom';
+import Cart from '../CartPage/cart';
 import PizzaList from '../PizzaList/pizzalist';
 
 
-
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      pizzaArray: [],
-    }
-  }
 
   componentDidMount() {
     this.dispatchPizzaToRedux();
   }
 
-  
+  // Sends Pizzas in DB to Redux through Get and Dispatch
   dispatchPizzaToRedux = () => {
     getOriginalPizzaList().then((response) => {
       console.log(response)
@@ -32,33 +25,24 @@ class App extends Component {
     })
   }
 
-  
-deletePizzaFromCart = (event) => {
-  deletePizzaOrder().then((response) => {
-    console.log(response)
-    this.props.dispatch({
-      type: 'DELETE_ORDER',
-      payload: event.target.dataset.id,
-    })
-  })
-}
-
 
 
   render() {
     return (
       <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Prime Pizza</h1>
-        </header>
-        <br/>
-        <img src="images/pizza_photo.png"/>
-        <p>Pizza is great.</p>
-        <Route exact path="/" component={PizzaList} />
-      </div>
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">Prime Pizza</h1>
+          </header>
+          <br />
+          <img src="images/pizza_photo.png" alt="pizza" />
+          <p>Pizza is great.</p>
+          <Route exact path="/" component={PizzaList} />
+          <Route path="/cart" component={Cart} />
+        </div>
       </Router>
-    )
+
+    );
   }
 }
 

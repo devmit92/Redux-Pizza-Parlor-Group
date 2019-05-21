@@ -9,13 +9,19 @@ import logger from 'redux-logger';
 const pizzaReducer = (state = [], action) => {
     if (action.type === 'ADD_PIZZA_TO_REDUX') {
         return action.payload
-    }
+    } 
     return state;
+
 }
 
 const cartReducer = (state = [], action) => {
     if (action.type === 'ADD_PIZZA_TO_CART') {
         return [...state, { name: action.payload.name, price: action.payload.price }];
+    } else if (action.type === 'DELETE_ORDER') {
+        const newState = state.filter((element, index) => {
+            return index !== parseInt(action.payload);
+        });
+        return newState;
     }
     return state;
 }
@@ -26,6 +32,6 @@ const storeInstance = createStore(
         cartReducer
     }),
     applyMiddleware(logger),
-);
+ );
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
+ ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));

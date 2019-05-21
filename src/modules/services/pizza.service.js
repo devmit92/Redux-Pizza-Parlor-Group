@@ -7,7 +7,7 @@ const getOriginalPizzaList = () => {
         })
     }
 
-const addPizzaToOrderTable = (pizzaObject) => {
+const addPizzaToOrderTable = () => {
     return axios.post('/api/order', pizzaObject);
 }
 

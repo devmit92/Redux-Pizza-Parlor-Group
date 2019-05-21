@@ -17,22 +17,16 @@ const pizzaReducer = (state = [], action) => {
 const pizzaAddedReducer = (state = [], action) => {
     if (action.type === 'PIZZA_DISPATCH') {
         return [...state, action.payload.pizzaArray];
-    }
-    return state;
-}
-
-const pizzaCheckoutReducer = (state = [], action) => {
-    if (action.type === 'CHECKOUT') {
-        return [...state.action.payload];
-    }else if (action.type === 'CLEARCHECKOUT'){
+    } else if (action.type === 'CHECKOUT') {
         return [];
-    };
+    }
+    return state
+};
 
 const storeInstance = createStore(
     combineReducers({
         pizzaReducer,
         pizzaAddedReducer,
-        pizzaCheckoutReducer
     }),
     applyMiddleware(logger),
  );

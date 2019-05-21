@@ -3,15 +3,17 @@ import './App.css';
 import { connect } from 'react-redux';
 import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
 import { logger } from 'redux-logger';
+import Axios from 'axios';
+import { addPizzaToOrderTable } from '../../modules/services/pizza.service';
 
 
 class CheckoutPage extends Component {
-    handleCheckout = (event) {
+    handleCheckout = (event) => {
+        addPizzaToOrderTable(this.reduxState.pizzaAddedReducer)
         this.props.dispatch({
             type: 'CLEARCHECKOUT'
         })
-        window.location.assign("http://localhost:3000/#/");
-    };
+    }
 
     render() {
         return (
@@ -24,7 +26,7 @@ class CheckoutPage extends Component {
                           );
                       })}
                   </ol>
-                  <Button color="primary" variant="contained" onClick={this.handleCheckout}><h2>Place Order!</h2></Button>
+                  <button onClick={this.handleCheckout}><h2>Place Order!</h2></button>
             </div>
         )
     }

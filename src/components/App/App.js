@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './App.css';
 import { connect } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
 import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
-import { getOriginalPizzaList, addPizzaToOrderTable } from '../../modules/services/pizza.service';
+import { getOriginalPizzaList, addPizzaToOrder } from '../../modules/services/pizza.service';
 
 
 

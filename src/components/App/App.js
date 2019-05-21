@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import { HashRouter as Router, Route } from "react-router-dom";
 import { connect } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
 import { getOriginalPizzaList, addPizzaToOrderTable } from '../../modules/services/pizza.service';
-
-
+import CustomerInfo from '../CustomerInfo/CustomerInfo';
 
 class App extends Component {
   constructor(props) {
@@ -41,10 +41,6 @@ class App extends Component {
     })
    }
 
-
-
-
-
   render() {
     const pizzaHTML = this.props.reduxState.pizzaReducer.map((pizza, index) => {
       return (
@@ -67,6 +63,11 @@ class App extends Component {
         <img src="images/pizza_photo.png"/>
         <p>Pizza is great.</p>
         {pizzaHTML}
+
+        <Router>
+          <Route path="/customer_info" component={CustomerInfo} />
+
+        </Router>
       </div>
     );
   }

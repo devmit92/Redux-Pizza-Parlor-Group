@@ -5,6 +5,7 @@ import App from './components/App/App';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+import customerInfoReducer from './modules/reducers/CustomerInfo.reducer';
 
 const pizzaReducer = (state = [], action) => {
     if (action.type === 'ADD_PIZZA_TO_REDUX') {
@@ -24,7 +25,8 @@ const pizzaAddedReducer = (state = [], action) => {
 const storeInstance = createStore(
     combineReducers({
         pizzaReducer,
-        pizzaAddedReducer
+        pizzaAddedReducer,
+        customerInfoReducer
     }),
     applyMiddleware(logger),
  );

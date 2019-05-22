@@ -7,6 +7,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
 import { getOriginalPizzaList, addPizzaToOrderTable } from '../../modules/services/pizza.service';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import AdminOrders from '../AdminOrders/AdminOrders';
+
 
 
 
@@ -60,15 +63,10 @@ class App extends Component {
       )
     })
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Prime Pizza</h1>
-        </header>
-        <br/>
-        <img src="images/pizza_photo.png"/>
-        <p>Pizza is great.</p>
-        {pizzaHTML}
-      </div>
+      <Router>
+        <Route exact path="/admin" component={AdminOrders} />
+
+      </Router>
     );
   }
 }

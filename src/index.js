@@ -21,10 +21,19 @@ const pizzaAddedReducer = (state = [], action) => {
     return state;
 }
 
+const pizzaAdminOrderReducer= (state = [], action) => {
+    if (action.type === 'DISPLAY_ADMIN_ORDER') {
+        return action.payload;
+    }
+    return state;
+}
+
+
 const storeInstance = createStore(
     combineReducers({
         pizzaReducer,
-        pizzaAddedReducer
+        pizzaAddedReducer,
+        pizzaAdminOrderReducer
     }),
     applyMiddleware(logger),
  );

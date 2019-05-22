@@ -5,6 +5,7 @@ import App from './components/App/App';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const pizzaReducer = (state = [], action) => {
     if (action.type === 'ADD_PIZZA_TO_REDUX') {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { displayOrderTable } from '../../modules/services/pizza.service';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 //  SO WE NEED TO PUSH THE AXIOS GET FOR THE ORDER TABLE INTO THE pizzaAdminOrderReducer REDUCER -- 
 // THE FUNCTION I CREATED FOR THE AXIOS GET IS CALLED displayOrderTable, HOW DO I PUSH AN AXIOS GET INTO A REDUCER - dispatch
@@ -29,28 +31,28 @@ class AdminOrders extends Component {
         const pizzaHTML = this.props.reduxState.pizzaAdminOrderReducer.map((pizza, index) => {
             return (
 
-    <div>
+
         <tbody>
             <tr>
-                <td>{pizza.customer_name}</td>
+                <td scope="row">{pizza.customer_name}</td>
                 <td>{pizza.time}</td>
                 <td>{pizza.type}</td>
                 <td>{pizza.total}</td>
             </tr>
         </tbody>
-    </div>
+    
 
             )
           })
         return (
             <div>
-                <table>
+                <table class="table">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Time Order Placed</th>
-                            <th>Type</th>
-                            <th>Cost</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Time Order Placed</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Cost</th>
                         </tr>
                     </thead>
                 {pizzaHTML}
